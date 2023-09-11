@@ -1,0 +1,16 @@
+name: Restore cache
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache restore
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/hello.txt
+        key: cache-${{ github.run_id }}
+        restore-keys: |
+          cache-${{ github.run_id }}
+          cache-
+    - name: Output file
+      run: cat ~/hello.txt
