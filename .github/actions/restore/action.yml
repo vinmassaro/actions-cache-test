@@ -13,4 +13,5 @@ runs:
           cache-${{ github.run_id }}
           cache-
     - name: Output file
+      shell: bash
       run: cat ~/hello.txt
