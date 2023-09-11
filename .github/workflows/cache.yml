@@ -1,0 +1,33 @@
+name: Cache test
+on: workflow_dispatch
+
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Create file
+      run: echo "hello world" >> ~/hello.txt
+    - name: Cache
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: |
+          ~/hello.txt
+        key: cache-${{ github.run_id }}
+          
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Cache restore
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/hello.txt
+        key: cache-${{ github.run_id }}
+        restore-keys: |
+          cache-${{ github.run_id }}
+          cache-
+    - name: Output file
+      run: cat ~/hello.txt
