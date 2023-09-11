@@ -6,29 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Create file
-      run: echo "hello world" >> ~/hello.txt
     - name: Cache
-      uses: actions/cache@v3
-      id: cache
-      with:
-        path: |
-          ~/hello.txt
-        key: cache-${{ github.run_id }}
+      uses: ./.github/actions/cache
           
   restore:
     runs-on: ubuntu-latest
     needs: cache
     steps:
     - uses: actions/checkout@v4
-    - name: Cache restore
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/hello.txt
-        key: cache-${{ github.run_id }}
-        restore-keys: |
-          cache-${{ github.run_id }}
-          cache-
-    - name: Output file
-      run: cat ~/hello.txt
+    - name: Restore
+      uses: ./.github/actions/restore
