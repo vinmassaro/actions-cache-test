@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: Create file
+      shell: bash
       run: echo "hello world" >> ~/hello.txt
 
     - name: Cache terminus
