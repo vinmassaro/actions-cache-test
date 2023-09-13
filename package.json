@@ -1,5 +1,5 @@
 {
-  "name": "cache-test"
+  "name": "cache-test",
   "release": {
     "branches": ["develop"]
   }
